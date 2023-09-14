@@ -4,8 +4,6 @@ const router = Router();
 const { Dog, Temperament } = require("../db");
 const { dogsTOTALinfo } = require("../controllers/dogsController");
 
-
-
 router.get("/", async (req, res) => {
   //-------SI ENTRO POR QUERY----------
   if (req.query.name) {
@@ -36,8 +34,6 @@ router.get("/", async (req, res) => {
     }
   }
 });
-
-
 
 //---------:idRaza----------------------->
 router.get("/:id", async (req, res) => {
@@ -87,14 +83,12 @@ router.get("/:id", async (req, res) => {
         image: `https://cdn2.thedogapi.com/images/${reference_image_id}.jpg`,
       });
     } catch (err) {
-      console.error(err); 
+      console.error(err);
       res.sendStatus(500);
       throw new Error(`Error al obtener la raza de la API: ${err.message}`);
     }
   }
 });
-
-
 
 //-------------------POST----------------------->
 router.post("/createDog", async (req, res) => {
@@ -134,8 +128,5 @@ router.post("/createDog", async (req, res) => {
     return res.status(200).send("The dog was created");
   }
 });
-
-
-
 
 module.exports = router;
