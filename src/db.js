@@ -2,6 +2,7 @@ require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+const pg = require('pg');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY } = process.env;
 
 
@@ -16,6 +17,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY } = process.env;
 const sequelize = new Sequelize(`${DB_DEPLOY}?sslmode=require`, {
   logging: false,
   native: false,
+  dialectModule: pg,
 });
 
 const basename = path.basename(__filename);
@@ -54,5 +56,5 @@ Temperament.belongsToMany(Dog, { through: "dog_temperament" });
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
-  dialectModule: pg, 
+
 };
